@@ -1,5 +1,4 @@
 import { SonicRay } from "../sound/SonicRay";
 
-export default interface Transport {
-    sendSonicFrame(ray: SonicRay): void;
-}
+export type Sender = (data: SonicRay) => void;
+export type Transport = (port: number) => Sender;

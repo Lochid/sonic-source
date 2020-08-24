@@ -224,6 +224,10 @@ $(function() {
     });
   
     // Socket events
+
+    socket.on('sonic-frame', (data)=>{
+      console.log(data);
+    })
   
     // Whenever the server emits 'login', log the login message
     socket.on('login', (data) => {
