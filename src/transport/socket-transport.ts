@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socket from 'socket.io';
-import { SonicRay } from '../sound/SonicRay';
+import { SonicRay } from '../sonic/SonicRay';
 import { Transport, OnSonicFrame } from './transport';
 
 export const transport: Transport = (port: number) => {

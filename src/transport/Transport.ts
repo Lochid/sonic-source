@@ -1,4 +1,4 @@
-import { SonicRay } from "../sound/SonicRay";
+import { SonicRay } from "../sonic/SonicRay";
 
 export const OnSonicFrame = 'sonic-frame';
 
