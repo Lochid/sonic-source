@@ -1,9 +1,12 @@
+var { express1: express, path1: path, http1: http } = require('./dist/transport/SocketTransport');
+
 // Setup basic express server
-var express = require('express');
 var app = express();
-var path = require('path');
-var server = require('http').createServer(app);
+var server = http.createServer(app);
 var io = require('socket.io')(server);
+var RR = require('./dist/sound-source/RandomSoundSource').default;
+var OnSonicFrame = require('./dist/sound-source/SoundSource').OnSonicFrame;
+
 var port = process.env.PORT || 3000;
 
 server.listen(port, () => {
@@ -17,9 +20,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var numUsers = 0;
 
+const rr = new RR();
+
 io.on('connection', (socket) => {
   var addedUser = false;
 
+  rr.on(OnSonicFrame, (val) => {
+    socket.emit(OnSonicFrame, val);
+  });
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
     // we tell the client to execute 'new message'
